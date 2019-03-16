@@ -29,31 +29,32 @@ public class MainActivity extends AppCompatActivity {
         mColorfulNavigation.add(new ColorfulNavigation.Item(ID_4, R.drawable.ic_home_black_24dp, R.color.test4, "Item 4"));
         mColorfulNavigation.add(new ColorfulNavigation.Item(ID_5, R.drawable.ic_home_black_24dp, R.color.test5, "Item 5"));
 
-        mColorfulNavigation.setOnItemSelectedListener(new ColorfulNavigation.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(ColorfulNavigation.Item item) {
-                Toast.makeText(MainActivity.this, "" + item.getId(), Toast.LENGTH_SHORT).show();
-                switch(item.getId()) {
-                    case ID_1 :{
-                        break;
-                    }
-                    case ID_2: {
-                        break;
-                    }
-                    case ID_3 :{
-                        break;
-                    }
-                    case ID_4: {
-                        break;
-                    }
-                    case ID_5: {
-                        break;
-                    }
-                    default:{
-                        break;
-                    }
-                }
-            }
-        });
+        mColorfulNavigation.setSelectedItem(0);
+//        mColorfulNavigation.setOnItemSelectedListener(new ColorfulNavigation.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(ColorfulNavigation.Item item) {
+//                Toast.makeText(MainActivity.this, "" + item.getId(), Toast.LENGTH_SHORT).show();
+//                switch(item.getId()) {
+//                    case ID_1 :{
+//                        break;
+//                    }
+//                    case ID_2: {
+//                        break;
+//                    }
+//                    case ID_3 :{
+//                        break;
+//                    }
+//                    case ID_4: {
+//                        break;
+//                    }
+//                    case ID_5: {
+//                        break;
+//                    }
+//                    default:{
+//                        break;
+//                    }
+//                }
+//            }
+//        });
     }
 }

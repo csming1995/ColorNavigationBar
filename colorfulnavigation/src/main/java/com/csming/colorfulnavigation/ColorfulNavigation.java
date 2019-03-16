@@ -35,6 +35,7 @@ public class ColorfulNavigation extends LinearLayout {
     private Paint mRightPaint;
 
     private OnItemSelectedListener mOnItemSelectedListener;
+    private OnItemSelectedListener mRealOnItemSelectedListener;
 
     private ValueAnimator mValueAnimator;
     private ValueAnimatorListener mValueAnimatorListener;
@@ -54,6 +55,17 @@ public class ColorfulNavigation extends LinearLayout {
         setOrientation(LinearLayout.HORIZONTAL);
         setWillNotDraw(false);
         init();
+
+        mOnItemSelectedListener = new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(Item item) {
+                startAnimator(item.index);
+
+                if (mRealOnItemSelectedListener != null) {
+                    mRealOnItemSelectedListener.onItemSelected(item);
+                }
+            }
+        };
     }
 
     private void init() {
@@ -107,6 +119,7 @@ public class ColorfulNavigation extends LinearLayout {
         LayoutParams layoutParams = new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1f);
         colorfulNavigationItem.setLayoutParams(layoutParams);
         addView(colorfulNavigationItem);
+        colorfulNavigationItem.setOnSelectedListener(mOnItemSelectedListener);
 
         mIndex = mItems.size();
         item.index = mIndex;
@@ -119,16 +132,15 @@ public class ColorfulNavigation extends LinearLayout {
     }
 
     public void setOnItemSelectedListener(final OnItemSelectedListener onItemSelectedListener) {
-        mOnItemSelectedListener = new OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(Item item) {
-                startAnimator(item.index);
-                onItemSelectedListener.onItemSelected(item);
-            }
-        };
-        for (ColorfulNavigationItem mItem : mColorfulNavigationItems) {
-            mItem.setOnSelectedListener(mOnItemSelectedListener);
-        }
+        this.mRealOnItemSelectedListener = onItemSelectedListener;
+    }
+
+    public void setSelectedItem(int index) {
+        if (index >= mItems.size()) return;
+        mPaint.setColor(getResources().getColor(mItems.get(index).color));
+        mRightPaint.setColor(getResources().getColor(mItems.get(index).color));
+        invalidate();
+        startAnimator(index);
     }
 
     private void startAnimator(int targetIndex) {
