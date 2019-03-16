@@ -20,7 +20,7 @@ allprojects {
 ### **Step 2.** Add the dependency
 ```gradle
 dependencies {
-  compile 'com.github.csming1995:ColorNavigationBar:1.0-beta1'
+  compile 'com.github.csming1995:ColorNavigationBar:1.0-beta2'
 }
 ```
 
