@@ -21,7 +21,7 @@ import java.util.List;
 public class ColorfulNavigation extends LinearLayout {
 
     private List<ColorfulNavigationItem> mColorfulNavigationItems;
-    private List<ColorfulNavigation.Item> mItems;
+    private List<Item> mItems;
 
     private int mIndex;
     private int mDrawIndex = 0;
@@ -85,6 +85,8 @@ public class ColorfulNavigation extends LinearLayout {
         mWidth = MeasureSpec.getSize(widthMeasureSpec);
         mHeight = MeasureSpec.getSize(heightMeasureSpec);
 
+        setMeasuredDimension(mWidth, mHeight);
+
         mItemWidth = mWidth / mItems.size();
         mRectF.left = mItemWidth * mIndex;
         mRectF.top = 0;
@@ -116,7 +118,7 @@ public class ColorfulNavigation extends LinearLayout {
         ColorfulNavigationItem colorfulNavigationItem = new ColorfulNavigationItem(getContext());
         colorfulNavigationItem.setItem(item);
 
-        LayoutParams layoutParams = new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1f);
+        LayoutParams layoutParams = new LayoutParams(0, LayoutParams.MATCH_PARENT, 1f);
         colorfulNavigationItem.setLayoutParams(layoutParams);
         addView(colorfulNavigationItem);
         colorfulNavigationItem.setOnSelectedListener(mOnItemSelectedListener);
@@ -153,8 +155,8 @@ public class ColorfulNavigation extends LinearLayout {
                 mValueAnimatorListener = new ValueAnimatorListener();
                 mValueAnimator.addUpdateListener(mValueAnimatorListener);
             }
-            mValueAnimator.setFloatValues(mRectF.left, targetLeft, targetLeft + (isRight? 20: - 20), targetLeft);
-            mValueAnimator.setDuration(380);
+            mValueAnimator.setFloatValues(mRectF.left, targetLeft/*, targetLeft + (isRight? 20: - 20), targetLeft*/);
+            mValueAnimator.setDuration(300);
             mValueAnimator.cancel();
             mValueAnimator.start();
         }
